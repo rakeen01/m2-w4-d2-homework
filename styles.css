@@ -1,0 +1,17 @@
+/* Layout polish */
+body {
+    background: #f7f5ef;
+}
+
+/* Navbar tweak */
+.navbar-brand {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Comment card look */
+.card {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.04);
+}

@@ -2,286 +2,67 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Food Blog</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: Arial, Helvetica, sans-serif;
-        }
 
-        #leftside {
-            float: left;
-            width: 30%;
-            min-height: 1200px;
-            background-color: rgb(77, 192, 154);
-        }
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-        #rightside {
-            float: left;
-            width: 70%;
-            min-height: 1200px;
-            background-color: rgb(238, 226, 192);
-            position: relative;
-        }
-
-        #container {
-            background-color: rgba(255, 255, 255, .85);
-            position: absolute;
-            top: 15%;
-            left: 15%;
-            min-width: 1100px;
-            min-height: 1050px;
-            border-radius: .7em;
-        }
-
-        header {
-            height: 50px;
-            background-color: rgba(231, 229, 229, .5);
-            font-size: 2.75em;
-            padding: .5em;
-            color: rgb(216, 150, 7);
-        }
-
-        header span {
-            font-family: 'Sacramento', cursive;
-        }
-
-        main {
-            position: relative;
-        }
-
-        main h2 {
-            position: absolute;
-            left: 20%;
-            top: 30px;
-            margin: 25px 0 200px 50px;
-            color: rgb(60, 190, 160);
-            text-transform: uppercase;
-        }
-
-        main #photos img {
-            margin: .75em;
-            border: .85em solid #fff;
-        }
-
-        section#blogposts {
-            position: absolute;
-            left: 20%;
-            top: 70px;
-            padding: 50px;
-        }
-
-        .post {
-            margin: 25px;
-            padding: 25px;
-            border: 2px solid rgba(83, 78, 58, .6);
-            border-radius: .5em;
-            position: relative;
-        }
-
-        /* small avatar next to each author */
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            margin-right: 12px;
-            vertical-align: middle;
-            cursor: pointer;
-        }
-
-        .author-line {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .author {
-            font-weight: bold;
-        }
-
-        .reply {
-            float: right;
-        }
-
-        /* modal styling */
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .45);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 999;
-        }
-
-        .modal {
-            width: 320px;
-            max-width: 90vw;
-            background: rgba(0, 0, 0, .9);
-            color: #fff;
-            padding: 18px 18px 12px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-        }
-
-        .modal h3 {
-            margin: 0 0 8px;
-        }
-
-        .modal .close-x {
-            position: absolute;
-            right: 10px;
-            top: 8px;
-            background: transparent;
-            color: #fff;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .modal .close-btn {
-            margin-top: 10px;
-        }
-
-        .modal-wrap {
-            position: relative;
-        }
-    </style>
+    <!-- App CSS -->
+    <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <aside id="leftside"></aside>
-    <aside id="rightside"></aside>
+    <div id="app">
+        <!-- Vue local component for navbar -->
+        <site-nav></site-nav>
 
-    <div id="container">
-        <header><span>Food Blog</span></header>
+        <main class="container my-4">
+            <div class="row">
+                <aside class="col-md-4 mb-4">
+                    <!-- Convert the white chicken chili image to Vue-bound src -->
+                    <img :src="heroSrc" :alt="heroAlt" class="img-fluid rounded shadow-sm" />
+                    <small class="text-muted d-block mt-2">&copy; Copyright FOOD BLOG</small>
+                </aside>
 
-        <main>
-            <aside id="photos">
-                <img src="images/chili.jpg" alt="White Chicken Chili" width="180">
-            </aside>
-            <h2>{{ title }}</h2>
+                <section class="col-md-8">
+                    <h3 class="mb-4 text-uppercase text-muted">Comments</h3>
 
-            <section id="blogposts">
-                <!-- pass profile src and listen for "show" event -->
-                <comment-post v-for="(p,i) in posts" :key="i" :author="p.author" :date="p.date" :text="p.text"
-                    :profile="profileSrc" @show="openProfile">
-                </comment-post>
-            </section>
-        </main>
+                    <!-- Example comment block (keep your existing comment markup/content here) -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="mr-3 bg-light border rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width:48px;height:48px;">
+                                    <span class="text-secondary font-weight-bold">👤</span>
+                                </div>
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-1">Brianna — February 18, 2021 @ 3:30 pm <span
+                                            class="text-muted">REPLY</span></h6>
+                                    <p class="mb-0">Was amazing! My Walmart didn’t have coriander in stock and didn’t
+                                        have ground cumin...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <footer>&copy; Copyright FOOD BLOG</footer>
-
-        <!-- Floating info box (modal) -->
-        <div v-if="showModal" class="overlay" @click.self="closeModal">
-            <div class="modal-wrap">
-                <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-                    <button class="close-x" aria-label="Close" @click="closeModal">&times;</button>
-                    <h3 id="modalTitle">{{ modal.name }}</h3>
-                    <p><strong>Foodie Level:</strong> {{ modal.level }}</p>
-                    <p><strong>Bio:</strong> {{ modal.bio }}</p>
-                    <button class="close-btn" @click="closeModal">Close</button>
-                </div>
+                    <!-- Add your remaining comment cards below; structure is Bootstrap cards -->
+                </section>
             </div>
-        </div>
+        </main>
     </div>
 
-    <script>
-        //  comment-post shows avatar (v-bind on src) and emits click
-        Vue.component('comment-post', {
-            props: ['author', 'date', 'text', 'profile'],
-            template: `
-        <div class="post">
-          <div class="author-line">
-            <img :src="profile" alt="profile" class="avatar" @click="$emit('show', author)" />
-            <span class="author">{{ author }}</span> —
-            <span class="date">{{ date }}</span>
-            <span class="reply">REPLY</span>
-          </div>
-          <p v-html="text"></p>
-        </div>
-      `
-        });
+    <!-- jQuery + Popper + Bootstrap 4 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        new Vue({
-            el: '#container',
-            data: {
-                title: 'Comments',
-                profileSrc: 'images/profile.png', // placeholder picture (v-bind)
-                posts: [
-                    {
-                        author: 'Brianna', date: 'February 18, 2021 @ 3:30 pm',
-                        text: "Was amazing! My Walmart didn’t have coriander in stock and didn’t have ground cumin. I used serrano instead of jalapeño. It was just like my favorite tortilla soup from BJs. I am sending this recipe to my family. I want everyone to try it!"
-                    },
-                    {
-                        author: 'LINH', date: 'February 15, 2021 @ 9:46 am',
-                        text: "I just made this soup today and it’s so tasty! didn’t have corn at home but still turned out very good. It’s a winner! I made beef chili for my parents; but since my dad has gout he can’t eat beef; this white chicken chili is perfect for him. Thank you Lisa!"
-                    },
-                    {
-                        author: 'CATHERINE LEONARDO', date: 'February 13, 2021 @ 12:58 pm',
-                        text: "I LOVE this White Chicken Chili! You are right, it is a satiating meal—delicious with toasted bread. Refreshingly different taste than any chicken chili I’ve made in the past. I made it exactly as written and added some chopped zucchini, carrots, and celery. Instead of shredding the chicken, I chopped it into small pieces. It freezes very well. Will be an all-time favorite, for sure."
-                    },
-                    {
-                        author: 'KALI', date: 'February 13, 2021 @ 11:31 am',
-                        text: "This recipe is dynamite! My partner usually won’t eat beans but he finished the whole pot (darn was hoping to have some for leftovers haha). This is a crowd-pleaser that I am going to add to my regular recipe rotation. Thanks so much, Lisa!"
-                    }
-                ],
-                // modal state + author info
-                showModal: false,
-                modal: { name: '', level: '', bio: '' },
-                authorInfo: {}
-            },
-            mounted() {
-                // load and parse author_more_info.txt
-                fetch('author_more_info.txt')
-                    .then(r => r.text())
-                    .then(txt => this.parseAuthorInfo(txt))
-                    .catch(() => {
-                        // Fallback (optional): leave empty if file not found
-                        this.authorInfo = {};
-                    });
+    <!-- Vue 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
-                // Close on ESC
-                window.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') this.closeModal();
-                });
-            },
-            methods: {
-                // parse text blocks from provided file
-                parseAuthorInfo(txt) {
-                    const blocks = txt.trim().split(/\n\s*\n/);
-                    const map = {};
-                    blocks.forEach(block => {
-                        const lines = block.split('\n').map(s => s.trim()).filter(Boolean);
-                        if (!lines.length) return;
-                        const name = lines[0].toUpperCase();
-                        const levelLine = (lines.find(l => /^Foodie Level:/i.test(l)) || '').replace(/^Foodie Level:\s*/i, '').trim();
-                        let bioIdx = lines.findIndex(l => /^Bio:/i.test(l));
-                        let bio = '';
-                        if (bioIdx !== -1) {
-                            const bioLines = lines.slice(bioIdx).join(' ');
-                            bio = bioLines.replace(/^Bio:\s*/i, '').trim();
-                        }
-                        map[name] = { level: levelLine, bio };
-                    });
-                    this.authorInfo = map;
-                },
-                // open/close
-                openProfile(name) {
-                    const key = String(name).toUpperCase();
-                    const info = this.authorInfo[key] || { level: '', bio: '' };
-                    this.modal = { name: String(name).trim(), level: info.level || '—', bio: info.bio || '—' };
-                    this.showModal = true;
-                },
-                closeModal() { this.showModal = false; }
-            }
-        });
-    </script>
+    <!-- App JS -->
+    <script src="app.js"></script>
 </body>
 
 </html>
